@@ -1,0 +1,203 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,500|Playfair+Display:700&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.container-fluid {
+  width: 96%;
+  padding: 2%;
+}
+.gradient-bg {
+  background: linear-gradient(#e66465, #9198e5);
+}
+input::placeholder,
+select {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+}
+/* heading */
+.heading {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  margin: 10px auto;
+}
+.h1 {
+  font-size: 40px;
+}
+.h2 {
+  font-size: 35px;
+}
+.h3 {
+  font-size: 30px;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.box-center {
+  margin: 50px auto;
+}
+.hr {
+  margin: 5px auto;
+  height: 2px;
+  border: none;
+  border-top: 2px solid #d2435e;
+  border-bottom: 2px solid #e2a32c;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.flex-box {
+  display: flex;
+  flex-direction: column;
+}
+.grid {
+  display: grid;
+  grid-gap: 5px;
+}
+.grid-2-col {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid-3-col {
+  grid-template-columns: auto 20% 25%;
+  padding: 25px 0;
+}
+.invoice-box {
+  width: 1000px;
+  padding: 25px;
+  background: #ffffff;
+  border: 1px solid #aaaaaa;
+}
+/* header */
+.print-btn {
+  background: #68c1d3;
+  padding: 10px;
+  font-weight: 500;
+  justify-content: flex-end;
+}
+.print-ico {
+  font-size: 15px;
+  color: #d2435e;
+  border: 1px solid #d2435e;
+  border-radius: 4px;
+  padding: 5px;
+}
+.company-info img {
+  width: 250px;
+  padding: 15px 0;
+}
+.select-box {
+  margin: 10px 0;
+}
+.select-box select {
+  float: right;
+  width: 60%;
+  font-size: 30px;
+  line-height: 50px;
+  background: #ffffff;
+}
+.select-box label {
+  height: 50px;
+  font-size: 28px;
+  padding: 4px;
+  font-weight: 500;
+}
+/* bill table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+.table th {
+  border-bottom: 1px solid #ffffff;
+  padding: 15px;
+}
+.table td {
+  padding: 5px;
+  height: 50px;
+}
+.table thead tr {
+  background-color: #68c1d3;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 300;
+}
+.table th {
+  text-align: left;
+  border-right: 1px solid #ffffff;
+}
+.table tbody tr:nth-child(even) {
+  background-color: #ecf7f9;
+}
+.table tbody tr td:first-child {
+  background: #d2435e;
+  color: #ffffff;
+}
+.table tbody tr td > input {
+  width: 100%;
+  height: 39px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 5px;
+  border-radius: 4px;
+}
+.big-box {
+  grid-area: 1 / 1 / span 4 / span 1;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+}
+.big-box .notices {
+  margin-top: 20px;
+  padding-left: 6px;
+  border-left: 6px solid #3989c6;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+}
+
+.amount-box {
+  margin: 10px 0;
+  justify-content: flex-end;
+}
+.amount-box h3 > input {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+/* footer */
+footer {
+  width: 100%;
+  text-align: center;
+  color: #777;
+  border-top: 1px solid #aaa;
+  padding: 8px 0;
+}
+/* input-box */
+.input-box label {
+  font-weight: 500;
+  font-size: 12px;
+}
+.input-box input {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #888888;
+  border-radius: 0px;
+  font-size: 20px;
+  padding: 4px;
+  margin: 5px 0;
+}
+.add-btn {
+  float: right;
+  background: #000000;
+  color: #ffffff;
+  font-size: 25px;
+  padding: 10px;
+}

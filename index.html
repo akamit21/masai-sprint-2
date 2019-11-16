@@ -1,0 +1,269 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Bill Generator</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- container-box -->
+    <div class="container-fluid gradient-bg">
+      <!-- invoice-box start -->
+      <div class="invoice-box box-center">
+        <!-- topbar -->
+        <div class="flex-row print-btn">
+          <span class="print-ico"><i class="fa fa-print"></i> PRINT</span>
+        </div>
+        <!-- header -->
+        <div class="grid grid-2-col">
+          <!-- company-info -->
+          <div class="company-info">
+            <img src="logo.png" alt="logo" />
+            <address>
+              A/46, Work Studio, BR 800002, IN<br />
+              <i class="fa fa-phone fa-fw"></i> (+91) 98765 43210<br />
+              <i class="fa fa-envelope fa-fw"></i> company@mail.com
+            </address>
+          </div>
+          <!-- bill-info -->
+          <div class="bill-info">
+            <h1 class="heading h1 text-right"><em>#INVOICE</em></h1>
+            <div class="input-box">
+              <label for="">NAME</label>
+              <input type="text" name="name" id="name" required />
+            </div>
+            <br />
+            <div class="input-box">
+              <label for="">DATE</label>
+              <input type="date" id="invoiceDate" />
+            </div>
+          </div>
+        </div>
+        <!-- /header -->
+
+        <hr class="hr" />
+
+        <!-- table -->
+        <div class="flex-box">
+          <div class="select-box">
+            <label for="">ADD ITEM</label>
+            <select name="" id="addItem" onchange="addItem()">
+              <option value="">Select Item</option>
+              <option value="#45">Dosa</option>
+              <option value="#46">Idli</option>
+              <option value="#49">Chicken</option>
+            </select>
+          </div>
+
+          <!-- item-box -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>###</th>
+                <th>ITEM</th>
+                <th>RATE</th>
+                <th>QTY</th>
+                <th>AMOUNT</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+        <!-- /table -->
+
+        <hr class="hr" />
+
+        <div class="grid grid-3-col">
+          <div class="big-box">
+            <h2>Thank You!</h2>
+            <div class="notices">
+              <div>NOTICE:</div>
+              <div class="notice">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit,
+                impedit?
+              </div>
+            </div>
+          </div>
+          <h5>SUBTOTAL</h5>
+          <input type="text" id="subtotal" value="0" readonly />
+          <h5>DISCOUNT</h5>
+          <input type="text" id="discount" value="0" />
+          <h5>GST</h5>
+          <input type="text" id="gst" value="0" />
+          <h5>SERVICE TAX</h5>
+          <input type="text" id="serviceTax" value="0" />
+        </div>
+        <hr class="hr" />
+        <!-- total-amount -->
+        <div class="flex-row amount-box">
+          <h3>
+            TOTAL AMOUNT &nbsp;<input
+              type="text"
+              id="total"
+              value="0.00"
+              readonly
+            />
+          </h3>
+        </div>
+        <!-- /total-amount -->
+        <!-- footer -->
+        <footer>
+          Invoice was created on a computer and is valid without the signature
+          and seal.
+        </footer>
+        <!-- /footer -->
+      </div>
+      <!-- /invoice-box -->
+    </div>
+    <!-- /container-box -->
+
+    <!-- script -->
+    <script>
+      // items array
+      var items = [
+        {
+          code: "#45",
+          name: "Dosa",
+          rate: 50
+        },
+        {
+          code: "#46",
+          name: "Idli",
+          rate: 60
+        },
+        {
+          code: "#49",
+          name: "Chicken",
+          rate: 100
+        }
+      ];
+
+      // row increment
+      var rowIndex = 0;
+
+      // variable declaration
+      var subtotal = getElement("#subtotal");
+      var discount = getElement("#discount");
+      var gst = getElement("#gst");
+      var serviceTax = getElement("#serviceTax");
+      var total = getElement("#total");
+
+      // added event listener to input
+      discount.addEventListener("change", calculateDiscount);
+      gst.addEventListener("change", calculateGST);
+      serviceTax.addEventListener("change", calculateServiceTax);
+
+      // function add item
+      function addItem() {
+        var item = getElement("#addItem");
+        var tableBody = getElement("#tableBody");
+        items.forEach(function(ele) {
+          if (ele.code == item.value) {
+            var itemRow = addTableRow(ele);
+            tableBody.appendChild(itemRow);
+          }
+        });
+        calculateSubTotal();
+      }
+
+      // function create
+      function addTableRow(item) {
+        rowIndex++;
+        var emptyRow = document.createElement("tr");
+        emptyRow.setAttribute("id", rowIndex);
+        emptyRow.innerHTML =
+          "<td>" +
+          item.code +
+          "</td>" +
+          "<td>" +
+          item.name +
+          "</td>" +
+          "<td><input type='text' id='rate" +
+          rowIndex +
+          "' value='" +
+          item.rate +
+          "'readonly /></td>" +
+          "<td><input type='number' id='qty" +
+          rowIndex +
+          "' value='1' onchange='calculatePrice()' /></td>" +
+          "<td><input type='text' class='amt' id='amt" +
+          rowIndex +
+          "' value='" +
+          item.rate +
+          "' readonly /></td>";
+        return emptyRow;
+      }
+
+      // fuction to calculate item price
+      function calculatePrice() {
+        var parentRow = event.target.parentNode.parentNode;
+        var parentRowId = parentRow.getAttribute("id");
+        var itemRate = getElement("#rate" + parentRowId).value;
+        var itemQty = event.target.value;
+        var itemPrice = itemRate * itemQty;
+        getElement("#amt" + parentRowId).value = itemPrice;
+        calculateSubTotal();
+      }
+
+      // function to calculate subtotal
+      function calculateSubTotal() {
+        subTotal = 0;
+        var amt = getAllElement(".amt");
+        amt.forEach(function(ele) {
+          subTotal += parseInt(ele.value);
+        });
+        getElement("#subtotal").value = subTotal;
+      }
+
+      // function to calculate subtotal
+      function calculateDiscount() {
+        var subtotal = getElement("#subtotal").value;
+        var discount = getElement("#discount").value;
+
+        if (parseInt(discount) < parseInt(subtotal)) {
+          var total = subtotal - discount;
+        }
+
+        getElement("#total").value = parseInt(total);
+      }
+
+      function calculateGST() {
+        var total = getElement("#total").value;
+        var gst = getElement("#gst").value;
+        if (gst > 0) {
+          total = ((100 + parseInt(gst)) * parseInt(total)) / 100;
+          total = Math.round(total);
+        }
+
+        getElement("#total").value = parseInt(total);
+      }
+      function calculateServiceTax() {
+        var total = getElement("#total").value;
+
+        var servicetax = getElement("#serviceTax").value;
+        if (servicetax > 0) {
+          total = ((100 + parseInt(servicetax)) * parseInt(total)) / 100;
+          total = Math.round(total);
+        }
+
+        getElement("#total").value = parseInt(total);
+      }
+
+      // querySelector
+      function getElement(el) {
+        return document.querySelector(el);
+      }
+
+      // getSelectorAll
+      function getAllElement(el) {
+        return document.querySelectorAll(el);
+      }
+    </script>
+  </body>
+</html>
