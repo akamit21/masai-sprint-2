@@ -6,7 +6,7 @@ Here I have used HTML5, CSS3 and basic JavaScipt to do the simple task.
 
 # Developer
 
-Anyoone can contribute to this code to make it more better and having better experince.
+Anyone can contribute to this code to make it more better and having better experince.
 
 ### Amit Kumar
 
